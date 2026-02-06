@@ -1,0 +1,73 @@
+{
+  "buildCommand" : {
+    "command" : "build",
+    "skipDependencies" : false,
+    "style" : "buildOnly"
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "cf29ebaac6848d573335cb1611bece6de48435c952b59d96192c58dff94cc45a"
+    }
+  ],
+  "containerPath" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/AliasDetector.xcodeproj",
+  "continueBuildingAfterErrors" : false,
+  "dependencyScope" : "workspace",
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "activeArchitecture" : "arm64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "iphoneos",
+      "sdk" : "iphoneos26.2",
+      "sdkVariant" : "iphoneos",
+      "supportedArchitectures" : [
+        "arm64e",
+        "arm64v8",
+        "arm64",
+        "armv8"
+      ],
+      "targetArchitecture" : "arm64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Products",
+      "derivedDataPath" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build",
+      "indexDataStoreFolderPath" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Index.noindex/PrecompiledHeaders",
+      "pchPath" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "commandLine" : {
+        "table" : {
+
+        }
+      },
+      "synthesized" : {
+        "table" : {
+          "ACTION" : "build",
+          "ASSETCATALOG_FILTER_FOR_DEVICE_MODEL" : "iPhone17,2",
+          "ASSETCATALOG_FILTER_FOR_DEVICE_OS_VERSION" : "18.5",
+          "ASSETCATALOG_FILTER_FOR_THINNING_DEVICE_CONFIGURATION" : "iPhone17,2",
+          "BUILD_ACTIVE_RESOURCES_ONLY" : "YES",
+          "ENABLE_PREVIEWS" : "NO",
+          "ENABLE_XOJIT_PREVIEWS" : "YES",
+          "ONLY_ACTIVE_ARCH" : "YES",
+          "TARGET_DEVICE_IDENTIFIER" : "00008140-00163CEC2284801C",
+          "TARGET_DEVICE_MODEL" : "iPhone17,2",
+          "TARGET_DEVICE_OS_VERSION" : "18.5",
+          "TARGET_DEVICE_PLATFORM_NAME" : "iphoneos"
+        }
+      }
+    }
+  },
+  "schemeCommand" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}

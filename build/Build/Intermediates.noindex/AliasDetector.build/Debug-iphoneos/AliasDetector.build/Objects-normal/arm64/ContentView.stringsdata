@@ -1,0 +1,96 @@
+{
+  "source": "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/AliasDetector/ContentView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Alias verificado",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 433
+        }
+      },
+      {
+        "comment": "",
+        "key": "¡Buuu! No lo encontré",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 474
+        }
+      },
+      {
+        "comment": "",
+        "key": "Este alias es un fantasma 👻",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 477
+        }
+      },
+      {
+        "comment": "",
+        "key": "Haciendo magia ✨",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 517
+        }
+      },
+      {
+        "comment": "",
+        "key": "Entidad",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 444
+        }
+      },
+      {
+        "comment": "",
+        "key": "Buscamos",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 484
+        }
+      },
+      {
+        "comment": "",
+        "key": "Probá escribir el alias en un papel con letra clara y volvé a escanearlo.",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 502
+        }
+      },
+      {
+        "comment": "",
+        "key": "Transferir a esta cuenta",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 533
+        }
+      },
+      {
+        "comment": "",
+        "key": "Volver a intentarlo",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 542
+        }
+      },
+      {
+        "comment": "",
+        "key": "Volver a intentarlo",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 551
+        }
+      },
+      {
+        "comment": "",
+        "key": "Ingresar alias manualmente",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 560
+        }
+      }
+    ]
+  },
+  "version": 1
+}

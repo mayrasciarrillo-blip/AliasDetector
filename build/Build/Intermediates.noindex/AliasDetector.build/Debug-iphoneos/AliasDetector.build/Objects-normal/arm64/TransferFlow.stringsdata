@@ -1,0 +1,208 @@
+{
+  "source": "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/AliasDetector/TransferFlow.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Ingresá el monto",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 125
+        }
+      },
+      {
+        "comment": "",
+        "key": "Leyendo monto del ticket...",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 180
+        }
+      },
+      {
+        "comment": "",
+        "key": "$",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 158
+        }
+      },
+      {
+        "comment": "",
+        "key": "0",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 167
+        }
+      },
+      {
+        "comment": "",
+        "key": "Dinero disponible:",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 190
+        }
+      },
+      {
+        "comment": "",
+        "key": "$ 50.000",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 193
+        }
+      },
+      {
+        "comment": "",
+        "key": "$ %@",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 210
+        }
+      },
+      {
+        "comment": "",
+        "key": "Ticket",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 227
+        }
+      },
+      {
+        "comment": "",
+        "key": "Categoría:",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 244
+        }
+      },
+      {
+        "comment": "",
+        "key": "%@ %@",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 250
+        }
+      },
+      {
+        "comment": "",
+        "key": "Continuar",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 270
+        }
+      },
+      {
+        "comment": "",
+        "key": "Seleccionar categoría",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 421
+        }
+      },
+      {
+        "comment": "",
+        "key": "Confirmar",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 496
+        }
+      },
+      {
+        "comment": "",
+        "key": "Vas a enviar",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 507
+        }
+      },
+      {
+        "comment": "",
+        "key": "La transferencia se acreditará de forma inmediata.",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 537
+        }
+      },
+      {
+        "comment": "",
+        "key": "Enviando dinero...",
+        "location": {
+          "startingColumn": 45,
+          "startingLine": 554
+        }
+      },
+      {
+        "comment": "",
+        "key": "Confirmar transferencia",
+        "location": {
+          "startingColumn": 68,
+          "startingLine": 554
+        }
+      },
+      {
+        "comment": "",
+        "key": "🎉",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 629
+        }
+      },
+      {
+        "comment": "",
+        "key": "🎊",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 633
+        }
+      },
+      {
+        "comment": "",
+        "key": "🥳",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 669
+        }
+      },
+      {
+        "comment": "",
+        "key": "🎉",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 673
+        }
+      },
+      {
+        "comment": "",
+        "key": "¡Listo! 🙌",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 681
+        }
+      },
+      {
+        "comment": "",
+        "key": "Tu transferencia fue enviada",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 684
+        }
+      },
+      {
+        "comment": "",
+        "key": "para",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 698
+        }
+      },
+      {
+        "comment": "",
+        "key": "¡Genial!",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 719
+        }
+      }
+    ]
+  },
+  "version": 1
+}

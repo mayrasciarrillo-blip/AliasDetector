@@ -1,0 +1,59 @@
+{
+  "" : {
+    "diagnostics" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/AliasDetector-primary.dia",
+    "emit-module-dependencies" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/AliasDetector-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/AliasDetector-primary-emit-module.dia",
+    "pch" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/AliasDetector-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/AliasDetector-primary.swiftdeps"
+  },
+  "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/AliasDetector/AliasDetectorApp.swift" : {
+    "const-values" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/AliasDetectorApp.swiftconstvalues",
+    "dependencies" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/AliasDetectorApp.d",
+    "diagnostics" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/AliasDetectorApp.dia",
+    "index-unit-output-path" : "/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/AliasDetectorApp.o",
+    "llvm-bc" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/AliasDetectorApp.bc",
+    "object" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/AliasDetectorApp.o",
+    "swift-dependencies" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/AliasDetectorApp.swiftdeps",
+    "swiftmodule" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/AliasDetectorApp~partial.swiftmodule"
+  },
+  "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/AliasDetector/CameraPicker.swift" : {
+    "const-values" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/CameraPicker.swiftconstvalues",
+    "dependencies" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/CameraPicker.d",
+    "diagnostics" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/CameraPicker.dia",
+    "index-unit-output-path" : "/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/CameraPicker.o",
+    "llvm-bc" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/CameraPicker.bc",
+    "object" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/CameraPicker.o",
+    "swift-dependencies" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/CameraPicker.swiftdeps",
+    "swiftmodule" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/CameraPicker~partial.swiftmodule"
+  },
+  "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/AliasDetector/CameraView.swift" : {
+    "const-values" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/CameraView.swiftconstvalues",
+    "dependencies" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/CameraView.d",
+    "diagnostics" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/CameraView.dia",
+    "index-unit-output-path" : "/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/CameraView.o",
+    "llvm-bc" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/CameraView.bc",
+    "object" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/CameraView.o",
+    "swift-dependencies" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/CameraView.swiftdeps",
+    "swiftmodule" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/CameraView~partial.swiftmodule"
+  },
+  "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/AliasDetector/ContentView.swift" : {
+    "const-values" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/ContentView.d",
+    "diagnostics" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/ContentView.dia",
+    "index-unit-output-path" : "/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/ContentView.o",
+    "swift-dependencies" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/ContentView.swiftdeps",
+    "swiftmodule" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/ContentView~partial.swiftmodule"
+  },
+  "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/AliasDetector/TransferFlow.swift" : {
+    "const-values" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/TransferFlow.swiftconstvalues",
+    "dependencies" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/TransferFlow.d",
+    "diagnostics" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/TransferFlow.dia",
+    "index-unit-output-path" : "/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/TransferFlow.o",
+    "llvm-bc" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/TransferFlow.bc",
+    "object" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/TransferFlow.o",
+    "swift-dependencies" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/TransferFlow.swiftdeps",
+    "swiftmodule" : "/Users/mayrasciarrillo/projects/test-ai-gateway/AliasDetector/build/Build/Intermediates.noindex/AliasDetector.build/Debug-iphoneos/AliasDetector.build/Objects-normal/arm64/TransferFlow~partial.swiftmodule"
+  }
+}

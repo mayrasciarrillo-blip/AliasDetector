@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSCameraUsageDescription</key>
+    <string>La app necesita acceso a la cámara para tomar fotos y detectar alias.</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>La app necesita guardar fotos para debug.</string>
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>La app necesita acceso a la red local para validar alias.</string>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsLocalNetworking</key>
+        <true/>
+    </dict>
+</dict>
+</plist>
