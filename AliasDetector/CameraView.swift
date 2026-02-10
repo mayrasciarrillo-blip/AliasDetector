@@ -119,7 +119,7 @@ class CameraPreviewView: UIView {
     // Motion detection - evitar OCR cuando la cámara se mueve
     private let motionManager = CMMotionManager()
     private var isDeviceStable = true  // Asumir estable inicialmente
-    private let stabilityThreshold: Double = 0.4   // Mide cambio entre frames
+    private let stabilityThreshold: Double = 1.2   // Más permisivo para uso en la calle
     private var lastAcceleration: (x: Double, y: Double, z: Double)?
 
     override init(frame: CGRect) {
@@ -375,13 +375,16 @@ extension CameraPreviewView: AVCaptureVideoDataOutputSampleBufferDelegate {
 
         // Solo enviar a OCR si el dispositivo está estable (no se está moviendo)
         guard isStableEnoughForOCR else {
+            print("📷 Dispositivo inestable, esperando...")
             return
         }
 
         lastOCRTime = now
+        print("📷 Enviando frame para OCR")
 
         // Usar imagen recortada del centro para OCR más rápido (menos datos a enviar)
         guard let croppedImage = croppedCenterImage(from: sampleBuffer) else {
+            print("📷 Error recortando imagen")
             return
         }
 
@@ -454,10 +457,9 @@ extension CameraPreviewView: AVCaptureVideoDataOutputSampleBufferDelegate {
         let bufferWidth = CVPixelBufferGetWidth(pixelBuffer)
         let bufferHeight = CVPixelBufferGetHeight(pixelBuffer)
 
-        // Capturar casi toda la pantalla para detectar alias en cualquier posición
-        // Solo recortamos un pequeño margen en los bordes
-        let cropWidth = Int(Double(bufferHeight) * 0.95)   // 95% del ancho (después de rotar)
-        let cropHeight = Int(Double(bufferWidth) * 0.85)   // 85% del alto (después de rotar)
+        // Balance: centrado pero con margen suficiente para no cortar el alias
+        let cropWidth = Int(Double(bufferHeight) * 0.85)   // 85% del ancho (después de rotar)
+        let cropHeight = Int(Double(bufferWidth) * 0.55)   // 55% del alto (después de rotar)
 
         let xOffset = (bufferHeight - cropWidth) / 2
         let yOffset = (bufferWidth - cropHeight) / 2

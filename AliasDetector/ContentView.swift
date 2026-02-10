@@ -368,6 +368,8 @@ struct AliasData {
     let entidad: String
     let nombreCompleto: String
     let cuitCuil: String
+    let cvu: String
+    let bankId: String
 }
 
 // Vista de confetti
@@ -681,7 +683,11 @@ struct ContentView: View {
         ZStack {
             // Camera preview con Vision integrado
             CameraView(capturedImage: .constant(nil), onScanResult: { result in
-                guard !isAnalyzing && !aliasFound && !showQRLanding && !showBarcodeLanding && detectedCodes.isEmpty else { return }
+                print("📷 onScanResult: \(result)")
+                guard !isAnalyzing && !aliasFound && !showQRLanding && !showBarcodeLanding && detectedCodes.isEmpty else {
+                    print("📷 BLOQUEADO - isAnalyzing:\(isAnalyzing) aliasFound:\(aliasFound)")
+                    return
+                }
 
                 switch result {
                 case .qrCode:
@@ -810,6 +816,19 @@ struct ContentView: View {
         .fullScreenCover(isPresented: $showBarcodeLanding, onDismiss: resetScan) {
             PaymentView(paymentType: .barcode, onGoHome: { dismiss() })
         }
+        .onAppear {
+            let token = Config.geminiToken
+            print("🚀 Scanner abierto - Gemini token: \(token.isEmpty ? "VACÍO" : "OK (\(token.prefix(20))...)")")
+            if token.isEmpty {
+                print("🔄 Intentando obtener token de Gemini...")
+                Task {
+                    let ok = await Config.refreshToken()
+                    print("🔄 Refresh Gemini token: \(ok ? "OK ✅" : "FALLÓ ❌ (servidor local no disponible)")")
+                }
+            }
+            // También pre-autenticar Stage
+            Task { await StageAuthService.shared.ensureValidToken() }
+        }
     }
 
     private func resetScan() {
@@ -848,10 +867,37 @@ struct ContentView: View {
         isAnalyzing = true
         statusMessage = "Procesando la imagen"
 
+        let token = Config.geminiToken
+        print("📸 Enviando imagen a Gemini (token: \(token.isEmpty ? "VACÍO ⚠️" : "\(token.prefix(20))..."))")
+
+        // Pre-autenticar con Stage en paralelo con Gemini OCR
+        Task { await StageAuthService.shared.ensureValidToken() }
+
+        // Si no hay token, intentar refrescar primero
+        if token.isEmpty {
+            print("⚠️ Token vacío, intentando refrescar...")
+            Task {
+                let refreshed = await Config.refreshToken()
+                print("🔄 Refresh result: \(refreshed), nuevo token: \(Config.geminiToken.isEmpty ? "VACÍO" : "OK")")
+                if !refreshed {
+                    await MainActor.run {
+                        isAnalyzing = false
+                        statusMessage = "Sin conexión al servidor de tokens"
+                    }
+                    return
+                }
+                // Reintentar con el token nuevo
+                await MainActor.run {
+                    self.analyzeImageForAlias(image, retryCount: retryCount)
+                }
+            }
+            return
+        }
+
         let url = URL(string: Config.geminiAPIUrl)!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue("Bearer \(Config.geminiToken)", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.timeoutInterval = 15  // Timeout más corto
 
         let boundary = "Boundary-\(UUID().uuidString)"
@@ -894,9 +940,14 @@ struct ContentView: View {
 
                 let defaultMessage = "Posicioná el alias, QR o código de barras en el centro de la pantalla"
 
-                if error != nil {
+                if let error = error {
+                    print("❌ Gemini request error: \(error.localizedDescription)")
                     statusMessage = defaultMessage
                     return
+                }
+
+                if let http = response as? HTTPURLResponse {
+                    print("📡 Gemini response status: \(http.statusCode)")
                 }
 
                 // Si el token expiró (401/403), refrescar y reintentar (máximo 1 vez)
@@ -934,6 +985,7 @@ struct ContentView: View {
                 if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
                    let resp = json["response"] as? String {
 
+                    print("🔍 Gemini raw: \"\(resp)\"")
                     let lower = resp.lowercased()
 
                     if lower.contains("no_alias") || lower.contains("no alias") ||
@@ -943,6 +995,7 @@ struct ContentView: View {
                     } else {
                         // Extraer el alias del texto
                         let aliasCandidate = extractAlias(from: resp)
+                        print("🔍 extractAlias: \"\(aliasCandidate)\"")
                         if aliasCandidate.count >= 6 {
                             aliasFound = true
                             resultText = aliasCandidate
@@ -985,47 +1038,39 @@ struct ContentView: View {
     }
 
     private func validateAlias(_ alias: String) {
-        let urlString = "\(Config.localAPIUrl)/validate/\(alias.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? alias)"
-        guard let url = URL(string: urlString) else {
-            aliasValidated = true
-            isValidatingAlias = false
-            return
-        }
-
-        var request = URLRequest(url: url)
-        request.timeoutInterval = 10
-
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            DispatchQueue.main.async {
+        Task {
+            let result = await StageAliasService.shared.validateAlias(alias)
+            await MainActor.run {
                 aliasValidated = true
                 isValidatingAlias = false
 
-                guard error == nil,
-                      let data = data,
-                      let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-                      let valid = json["valid"] as? Bool else {
-                    // Bottom sheet aparecerá con el resultado
-                    return
-                }
-
-                if valid, let dataDict = json["data"] as? [String: Any] {
-                    // Mostrar confetti
+                switch result {
+                case .success(let info):
                     showConfetti = true
-
-                    // Haptic feedback
                     UINotificationFeedbackGenerator().notificationOccurred(.success)
 
+                    let tipo: String
+                    if let cvu = info.cvu, !cvu.isEmpty {
+                        tipo = "CVU"
+                    } else {
+                        tipo = "CBU"
+                    }
+
                     aliasData = AliasData(
-                        alias: dataDict["alias"] as? String ?? alias,
-                        tipo: dataDict["tipo"] as? String ?? "?",
-                        entidad: dataDict["entidad"] as? String ?? "?",
-                        nombreCompleto: dataDict["nombre_completo"] as? String ?? "?",
-                        cuitCuil: dataDict["cuit_cuil"] as? String ?? "?"
+                        alias: info.alias ?? alias,
+                        tipo: tipo,
+                        entidad: info.displayBank,
+                        nombreCompleto: info.displayName,
+                        cuitCuil: info.cuil ?? "?",
+                        cvu: info.cvu ?? "",
+                        bankId: info.bankID ?? ""
                     )
+
+                case .failure(let error):
+                    print("❌ Alias validation failed: \(error)")
                 }
-                // Bottom sheet aparecerá con el resultado
             }
-        }.resume()
+        }
     }
 }
 

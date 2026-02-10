@@ -65,6 +65,8 @@ struct TransferFlowView: View {
     @State private var amount: String = ""
     @State private var motivo: String = "Varios"
     @State private var isProcessing = false
+    @State private var transferError: String?
+    @State private var transferResponse: StageTransferService.TransferResponse?
     @Namespace private var animation
 
     enum TransferStep {
@@ -81,6 +83,7 @@ struct TransferFlowView: View {
                 TransferSuccessView(
                     aliasData: aliasData,
                     amount: amount,
+                    transferResponse: transferResponse,
                     onDone: onComplete
                 )
                 .transition(.opacity)
@@ -99,13 +102,40 @@ struct TransferFlowView: View {
             }
         }
         .animation(.spring(response: 0.4, dampingFraction: 0.8), value: currentStep)
+        .alert("Error al transferir", isPresented: Binding(
+            get: { transferError != nil },
+            set: { if !$0 { transferError = nil } }
+        )) {
+            Button("Reintentar") { processTransfer() }
+            Button("Cancelar", role: .cancel) {}
+        } message: {
+            Text(transferError ?? "Ocurrió un error inesperado")
+        }
     }
 
     private func processTransfer() {
         isProcessing = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            isProcessing = false
-            currentStep = .success
+        transferError = nil
+
+        let numericAmount = Double(amount.replacingOccurrences(of: ",", with: ".")) ?? 0
+
+        Task {
+            let result = await StageTransferService.shared.executeTransfer(
+                amount: numericAmount,
+                aliasData: aliasData,
+                category: motivo
+            )
+
+            await MainActor.run {
+                isProcessing = false
+                switch result {
+                case .success(let response):
+                    transferResponse = response
+                    currentStep = .success
+                case .failure(let error):
+                    transferError = error.localizedDescription
+                }
+            }
         }
     }
 }
@@ -628,6 +658,7 @@ struct GenericSuccessView: View {
     let subtitle: String
     let recipientLabel: String
     let recipientName: String
+    var transactionIds: String? = nil
     let buttonText: String
     let onDone: () -> Void
 
@@ -713,6 +744,14 @@ struct GenericSuccessView: View {
                             Text(recipientName)
                                 .font(.system(size: 16, weight: .semibold))
                         }
+
+                        if let ids = transactionIds {
+                            Divider()
+                            Text(ids)
+                                .font(.system(size: 12, design: .monospaced))
+                                .foregroundColor(.secondary)
+                                .multilineTextAlignment(.center)
+                        }
                     }
                     .padding(.vertical, 24)
                     .padding(.horizontal, 32)
@@ -784,6 +823,7 @@ struct GenericSuccessView: View {
 struct TransferSuccessView: View {
     let aliasData: AliasData
     let amount: String
+    var transferResponse: StageTransferService.TransferResponse?
     let onDone: () -> Void
 
     var body: some View {
@@ -793,9 +833,21 @@ struct TransferSuccessView: View {
             subtitle: "Tu transferencia fue enviada",
             recipientLabel: "para",
             recipientName: aliasData.nombreCompleto,
+            transactionIds: transactionIdsText,
             buttonText: "¡Genial!",
             onDone: onDone
         )
+    }
+
+    private var transactionIdsText: String? {
+        var parts: [String] = []
+        if let authId = transferResponse?.authorizationId {
+            parts.append("Authorization: \(authId)")
+        }
+        if let txId = transferResponse?.transactionId {
+            parts.append("Transaction: \(txId)")
+        }
+        return parts.isEmpty ? nil : parts.joined(separator: "\n")
     }
 }
 

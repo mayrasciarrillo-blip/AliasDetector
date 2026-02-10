@@ -94,6 +94,9 @@ struct SmartScannerView: View {
         isAnalyzing = true
         statusMessage = "Analizando imagen..."
 
+        // Pre-autenticar con Stage en paralelo con Gemini OCR
+        Task { await StageAuthService.shared.ensureValidToken() }
+
         let url = URL(string: Config.geminiAPIUrl)!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -253,35 +256,28 @@ struct SmartScannerView: View {
     }
 
     private func validateAlias(_ alias: String) {
-        let urlString = "\(Config.localAPIUrl)/validate/\(alias.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? alias)"
-        guard let url = URL(string: urlString) else {
-            isAnalyzing = false
-            statusMessage = "Error al validar alias"
-            return
-        }
-
-        var request = URLRequest(url: url)
-        request.timeoutInterval = 10
-
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            DispatchQueue.main.async {
+        Task {
+            let result = await StageAliasService.shared.validateAlias(alias)
+            await MainActor.run {
                 isAnalyzing = false
 
-                guard error == nil,
-                      let data = data,
-                      let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-                      let valid = json["valid"] as? Bool else {
-                    statusMessage = "Error al validar. Intentá de nuevo."
-                    return
-                }
+                switch result {
+                case .success(let info):
+                    let tipo: String
+                    if let cvu = info.cvu, !cvu.isEmpty {
+                        tipo = "CVU"
+                    } else {
+                        tipo = "CBU"
+                    }
 
-                if valid, let dataDict = json["data"] as? [String: Any] {
                     validatedAliasData = AliasData(
-                        alias: dataDict["alias"] as? String ?? alias,
-                        tipo: dataDict["tipo"] as? String ?? "?",
-                        entidad: dataDict["entidad"] as? String ?? "?",
-                        nombreCompleto: dataDict["nombre_completo"] as? String ?? "?",
-                        cuitCuil: dataDict["cuit_cuil"] as? String ?? "?"
+                        alias: info.alias ?? alias,
+                        tipo: tipo,
+                        entidad: info.displayBank,
+                        nombreCompleto: info.displayName,
+                        cuitCuil: info.cuil ?? "?",
+                        cvu: info.cvu ?? "",
+                        bankId: info.bankID ?? ""
                     )
                     detectedType = .alias(alias)
                     statusMessage = "¡Alias verificado!"
@@ -289,11 +285,12 @@ struct SmartScannerView: View {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         showResult = true
                     }
-                } else {
+
+                case .failure:
                     statusMessage = "Alias no registrado: \(alias)"
                 }
             }
-        }.resume()
+        }
     }
 
     private func extractAlias(from text: String) -> String {
