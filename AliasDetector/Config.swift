@@ -3,13 +3,42 @@ import Foundation
 // MARK: - Configuración centralizada
 
 struct Config {
-    // Token de Gemini - expira en ~1 hora
-    // Regenerar con: gcloud auth print-identity-token
-    static var geminiToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImMyN2JhNDBiMDk1MjlhZDRmMTY4MjJjZTgzMTY3YzFiYzM5MTAxMjIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzMjU1NTk0MDU1OS5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsImF1ZCI6IjMyNTU1OTQwNTU5LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTAzNTcxODk4Njc5NDQ0MjUwNzY0IiwiaGQiOiJ1YWxhLmNvbS5hciIsImVtYWlsIjoibWF5cmEuc2NpYXJyaWxsb0B1YWxhLmNvbS5hciIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiU0Z1ODdYdmZkT2FZTjJxcFNKM1M2ZyIsImlhdCI6MTc3MDM5ODMzOSwiZXhwIjoxNzcwNDAxOTM5fQ.JRJOrjH0s9a4PNw3ZZrOq7w_Gt2IHgb8SEvCYFEvEoE-3SH44fZHhVW6if_PtPUHcYFlO3Ru2dVQlku4pyTurTvGGgE0eiyUc5PkegyYJnwdKisAgGIfqyHJ3L4MkHtCFt37exgesIFic__5xotYyKXYIsv4r5Il75qLfw864LyT7yRaymavE3IE5Y5hzoNAqawHtiCYwlj-HPotiUI3XHeDDAEuxYzhX2GNbSk_T8JNBRM8tDVxdN_cUPgAN8oBKMDtGUIvyIi7dse2cEGEwZ-EKTWH-Ub-p4oAOUXtGw-482mj0ZRSYL_abhY39ZSlnWwebk3mtXHRK6xJuVy3og"
+    // Token de Gemini - se obtiene del servidor automáticamente
+    static var geminiToken: String {
+        get { UserDefaults.standard.string(forKey: "geminiToken") ?? "" }
+        set { UserDefaults.standard.set(newValue, forKey: "geminiToken") }
+    }
 
     // URL base de la API de Gemini
     static let geminiAPIUrl = "https://genai.ally.data.ua.la/data-platform/test/gemini"
 
-    // URL base de la API local (validación de alias)
-    static let localAPIUrl = "http://172.26.102.5:8000"
+    // URL base de la API local (validación de alias y token)
+    static let localAPIUrl = "http://192.168.1.133:8000"
+
+    // Obtener token fresco del servidor
+    static func refreshToken() async -> Bool {
+        guard let url = URL(string: "\(localAPIUrl)/token") else { return false }
+
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+               let token = json["token"] as? String {
+                geminiToken = token
+                print("Token actualizado correctamente")
+                return true
+            }
+        } catch {
+            print("Error obteniendo token: \(error)")
+        }
+        return false
+    }
+
+    // MARK: - Stage Configuration
+
+    /// Toggle para usar API de Stage en lugar de mock local
+    /// Cambiar a `true` cuando se tengan permisos en Stage
+    static let useStageAPI = false
+
+    /// URL base de la API de transfers en Stage
+    static let stageTransfersURL = "https://bff-transfers.api.stage.prepaid.ar.ua.la/api/v1"
 }

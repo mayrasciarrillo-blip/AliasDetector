@@ -839,7 +839,8 @@ struct ContentView: View {
     }
 
     // Análisis de imagen solo para alias (QR y barcodes ya se detectan con Vision)
-    private func analyzeImageForAlias(_ image: UIImage) {
+    private func analyzeImageForAlias(_ image: UIImage, retryCount: Int = 0) {
+        let maxRetries = 1  // Solo 1 reintento después de refrescar token
         guard let imageData = image.jpegData(compressionQuality: 0.6) else {
             return
         }
@@ -895,6 +896,31 @@ struct ContentView: View {
 
                 if error != nil {
                     statusMessage = defaultMessage
+                    return
+                }
+
+                // Si el token expiró (401/403), refrescar y reintentar (máximo 1 vez)
+                if let http = response as? HTTPURLResponse,
+                   (http.statusCode == 401 || http.statusCode == 403) {
+                    if retryCount < maxRetries {
+                        Task {
+                            let refreshed = await Config.refreshToken()
+                            if refreshed {
+                                print("🔄 Token refrescado, reintentando... (intento \(retryCount + 1))")
+                                DispatchQueue.main.async {
+                                    self.analyzeImageForAlias(image, retryCount: retryCount + 1)
+                                }
+                            } else {
+                                print("❌ No se pudo refrescar el token")
+                                DispatchQueue.main.async {
+                                    self.statusMessage = defaultMessage
+                                }
+                            }
+                        }
+                    } else {
+                        print("❌ Token inválido después de \(maxRetries) reintentos")
+                        statusMessage = defaultMessage
+                    }
                     return
                 }
 

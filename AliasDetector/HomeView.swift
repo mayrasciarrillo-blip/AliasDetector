@@ -1,6 +1,13 @@
 import SwiftUI
 import UIKit
 
+// MARK: - Font Extension (SF Pro Rounded)
+extension Font {
+    static func rounded(_ size: CGFloat, weight: Font.Weight = .regular) -> Font {
+        .system(size: size, weight: weight, design: .rounded)
+    }
+}
+
 // MARK: - Home View
 struct HomeView: View {
     @State private var showTransferScanner = false
@@ -19,14 +26,14 @@ struct HomeView: View {
                     VStack(spacing: 0) {
                         // Blue gradient header section
                         ZStack {
-                            // Gradient background
+                            // Gradient background - Azul Ualá puro
                             LinearGradient(
                                 colors: [
-                                    Color(red: 0.25, green: 0.20, blue: 0.95),
-                                    Color(red: 0.35, green: 0.30, blue: 1.0)
+                                    Color(red: 0.22, green: 0.28, blue: 0.95),
+                                    Color(red: 0.28, green: 0.35, blue: 1.0)
                                 ],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
+                                startPoint: .top,
+                                endPoint: .bottom
                             )
 
                             VStack(spacing: 20) {
@@ -106,12 +113,12 @@ struct HomeHeader: View {
                     .fill(Color.white.opacity(0.2))
                     .frame(width: 44, height: 44)
                 Text("M")
-                    .font(.system(size: 18, weight: .semibold))
+                    .font(.rounded(18, weight: .semibold))
                     .foregroundColor(.white)
             }
 
             Text("Hola, Mayra")
-                .font(.system(size: 18, weight: .semibold))
+                .font(.rounded(18, weight: .semibold))
                 .foregroundColor(.white)
 
             Spacer()
@@ -131,7 +138,7 @@ struct HomeHeader: View {
                         .stroke(Color.white, lineWidth: 1.5)
                         .frame(width: 28, height: 28)
                     Text("?")
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.rounded(14, weight: .semibold))
                         .foregroundColor(.white)
                 }
             }
@@ -157,7 +164,7 @@ struct BalanceSection: View {
                     Text("🇦🇷")
                         .font(.system(size: 12))
                     Text("ARS")
-                        .font(.system(size: 12, weight: .semibold))
+                        .font(.rounded(12, weight: .semibold))
                         .foregroundColor(.white)
                 }
                 .padding(.horizontal, 10)
@@ -173,17 +180,17 @@ struct BalanceSection: View {
             HStack(spacing: 4) {
                 if hideBalance {
                     Text("$ ••••••")
-                        .font(.system(size: 48, weight: .bold))
+                        .font(.rounded(48, weight: .bold))
                         .foregroundColor(.white)
                 } else {
                     Text("$")
-                        .font(.system(size: 48, weight: .bold))
+                        .font(.rounded(48, weight: .bold))
                         .foregroundColor(.white)
                     Text("20.501")
-                        .font(.system(size: 48, weight: .bold))
+                        .font(.rounded(48, weight: .bold))
                         .foregroundColor(.white)
                     Text(",73")
-                        .font(.system(size: 24, weight: .semibold))
+                        .font(.rounded(24, weight: .semibold))
                         .foregroundColor(.white.opacity(0.8))
                         .offset(y: -10)
                 }
@@ -202,13 +209,13 @@ struct BalanceSection: View {
                     Text("🔥")
                         .font(.system(size: 14))
                     Text("26%")
-                        .font(.system(size: 14, weight: .bold))
+                        .font(.rounded(14, weight: .bold))
                         .foregroundColor(.white)
-                    Text("Tu plata está creciendo")
+                    Text("Ingresá dinero y aprovechá tu tasa")
                         .font(.system(size: 14))
                         .foregroundColor(.white)
                     Image(systemName: "chevron.right")
-                        .font(.system(size: 12, weight: .semibold))
+                        .font(.rounded(12, weight: .semibold))
                         .foregroundColor(.white)
                 }
                 .padding(.horizontal, 16)
@@ -245,7 +252,7 @@ struct QuickActionButton: View {
             VStack(spacing: 8) {
                 ZStack {
                     Circle()
-                        .fill(Color(red: 0.2, green: 0.15, blue: 0.8))
+                        .fill(Color(red: 0.18, green: 0.24, blue: 0.82))
                         .frame(width: 56, height: 56)
                     Image(systemName: icon)
                         .font(.system(size: 20, weight: .medium))
@@ -262,10 +269,10 @@ struct QuickActionButton: View {
 // MARK: - Services Row
 struct ServicesRow: View {
     let services = [
-        ("heart.fill", "Seguro\nde Vida", true),
-        ("building.columns", "Dólar Oficial", false),
-        ("storefront", "Tu Negocio", false),
-        ("banknote", "Préstamos", false),
+        ("heart", "Seguro\nde Vida", true),
+        ("building.columns", "Dólar\nOficial", false),
+        ("storefront", "Tu\nNegocio", false),
+        ("dollarsign.circle", "Préstamos", false),
         ("iphone", "Recargas", false)
     ]
 
@@ -294,24 +301,24 @@ struct ServiceCard: View {
                         .font(.system(size: 24))
                         .foregroundColor(ualaBlue)
                     Text(label)
-                        .font(.system(size: 11, weight: .medium))
+                        .font(.rounded(11, weight: .medium))
                         .foregroundColor(.primary)
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
                         .frame(width: 70)
                 }
                 .frame(width: 85, height: 85)
-                .background(Color.white)
+                .background(Color(UIColor.secondarySystemGroupedBackground))
                 .cornerRadius(12)
                 .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
 
                 if isNew {
                     Text("Nuevo")
-                        .font(.system(size: 9, weight: .semibold))
-                        .foregroundColor(.black)
+                        .font(.rounded(9, weight: .semibold))
+                        .foregroundColor(.primary)
                         .padding(.horizontal, 6)
                         .padding(.vertical, 3)
-                        .background(Color.white)
+                        .background(Color(UIColor.systemBackground))
                         .cornerRadius(4)
                         .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 1)
                         .offset(x: -4, y: -4)
@@ -324,25 +331,22 @@ struct ServiceCard: View {
 // MARK: - Dollar Rates Section
 struct DollarRatesSection: View {
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 12) {
-                DollarRateCard(type: "Dólar Oficial", rate: "1.464,00")
-                DollarRateCard(type: "Dólar MEP", rate: "1.465,67")
-            }
-            .padding(.horizontal, 4)
+        HStack(spacing: 12) {
+            // Dólar Oficial
+            DollarOficialCard()
+            // Dólar MEP
+            DollarMEPCard()
         }
     }
 }
 
-struct DollarRateCard: View {
-    let type: String
-    let rate: String
-
+struct DollarOficialCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Text(type)
-                    .font(.system(size: 16, weight: .semibold))
+                Text("Dólar Oficial")
+                    .font(.rounded(16, weight: .semibold))
+                    .foregroundColor(.primary)
                 Spacer()
                 Image(systemName: "chevron.right")
                     .font(.system(size: 14))
@@ -353,21 +357,44 @@ struct DollarRateCard: View {
                 .font(.system(size: 13))
                 .foregroundColor(.secondary)
 
-            HStack {
-                Text("COMPRA")
-                    .font(.system(size: 11, weight: .semibold))
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 4)
-                    .background(Color(UIColor.systemGray5))
-                    .cornerRadius(12)
-            }
+            Text("COMPRA")
+                .font(.rounded(11, weight: .semibold))
+                .foregroundColor(.primary)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 4)
+                .background(Color(UIColor.systemGray5))
+                .cornerRadius(12)
 
-            Text("$ \(rate)")
-                .font(.system(size: 22, weight: .bold))
+            Text("$ 1.445,00")
+                .font(.rounded(22, weight: .bold))
+                .foregroundColor(.primary)
         }
         .padding(16)
-        .frame(width: 170)
-        .background(Color.white)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color(UIColor.secondarySystemGroupedBackground))
+        .cornerRadius(12)
+        .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
+    }
+}
+
+struct DollarMEPCard: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Dólar MEP")
+                .font(.rounded(16, weight: .semibold))
+                .foregroundColor(.primary)
+
+            Spacer()
+
+            Text("Disponible en días hábiles de 10:35 a 16:55 hs.")
+                .font(.system(size: 13))
+                .foregroundColor(.secondary)
+                .lineLimit(3)
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(minHeight: 140)
+        .background(Color(UIColor.secondarySystemGroupedBackground))
         .cornerRadius(12)
         .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
@@ -377,67 +404,78 @@ struct DollarRateCard: View {
 struct TasaPlusCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text("¡Mantené tu Tasa Plus el mes que viene!")
-                    .font(.system(size: 15, weight: .semibold))
-                Text("🔥")
-            }
+            Text("¿Y si en marzo vas por el 26%?")
+                .font(.rounded(16, weight: .semibold))
+                .foregroundColor(.primary)
 
             Text("Más usás Ualá, más sube tu tasa.")
-                .font(.system(size: 13))
+                .font(.system(size: 14))
                 .foregroundColor(.secondary)
 
-            // Progress bar
-            HStack(spacing: 0) {
-                // 20% segment (active)
-                Rectangle()
-                    .fill(Color.green)
-                    .frame(height: 4)
+            // Progress bar - estilo Ualá
+            GeometryReader { geo in
+                let width = geo.size.width
+                let segment = width / 3
 
-                Circle()
-                    .fill(Color.green)
-                    .frame(width: 12, height: 12)
+                ZStack(alignment: .leading) {
+                    // Background track
+                    RoundedRectangle(cornerRadius: 3)
+                        .fill(Color(UIColor.systemGray5))
+                        .frame(height: 6)
 
-                // 23% segment
-                Rectangle()
-                    .fill(Color(UIColor.systemGray4))
-                    .frame(height: 4)
+                    // Green progress (hasta 23% = 2/3)
+                    RoundedRectangle(cornerRadius: 3)
+                        .fill(Color.green)
+                        .frame(width: segment * 2, height: 6)
 
-                Circle()
-                    .stroke(Color(UIColor.systemGray4), lineWidth: 2)
-                    .frame(width: 12, height: 12)
+                    // Dots
+                    HStack(spacing: 0) {
+                        // 20% dot
+                        Circle()
+                            .fill(Color.green)
+                            .frame(width: 14, height: 14)
 
-                // 26% segment
-                Rectangle()
-                    .fill(Color(UIColor.systemGray4))
-                    .frame(height: 4)
+                        Spacer()
 
-                Circle()
-                    .stroke(Color(UIColor.systemGray4), lineWidth: 2)
-                    .frame(width: 12, height: 12)
+                        // 23% dot (current)
+                        Circle()
+                            .fill(Color.green)
+                            .frame(width: 14, height: 14)
+
+                        Spacer()
+
+                        // 26% dot (target)
+                        Circle()
+                            .stroke(Color(UIColor.systemGray4), lineWidth: 2)
+                            .background(Circle().fill(Color(UIColor.secondarySystemGroupedBackground)))
+                            .frame(width: 14, height: 14)
+                    }
+                }
             }
+            .frame(height: 14)
             .padding(.vertical, 8)
 
+            // Labels
             HStack {
                 Text("20%")
-                    .font(.system(size: 12, weight: .semibold))
+                    .font(.rounded(12, weight: .semibold))
                     .foregroundColor(.green)
                 Spacer()
                 Text("23%")
-                    .font(.system(size: 12))
-                    .foregroundColor(.secondary)
+                    .font(.rounded(12, weight: .semibold))
+                    .foregroundColor(.green)
                 Spacer()
                 Text("26%")
                     .font(.system(size: 12))
                     .foregroundColor(.secondary)
             }
 
-            Text("Te faltan $ 239.250 para subir tu tasa a 23%.")
+            Text("Te faltan $ 122.164,96 para subir tu tasa a 26%.")
                 .font(.system(size: 13))
                 .foregroundColor(.secondary)
         }
         .padding(16)
-        .background(Color.white)
+        .background(Color(UIColor.secondarySystemGroupedBackground))
         .cornerRadius(12)
         .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
@@ -451,8 +489,8 @@ struct CreditCardSection: View {
             ZStack(alignment: .topLeading) {
                 LinearGradient(
                     colors: [
-                        Color(red: 0.25, green: 0.20, blue: 0.85),
-                        Color(red: 0.35, green: 0.30, blue: 0.95)
+                        Color(red: 0.22, green: 0.28, blue: 0.95),
+                        Color(red: 0.28, green: 0.35, blue: 1.0)
                     ],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
@@ -472,7 +510,7 @@ struct CreditCardSection: View {
                     .padding(.bottom, 40)
 
                     Text("Tarjeta de Crédito")
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.rounded(16, weight: .semibold))
                         .foregroundColor(.white)
 
                     HStack {
@@ -541,7 +579,7 @@ struct PromoCard: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.rounded(14, weight: .semibold))
                 Text(subtitle)
                     .font(.system(size: 12))
                     .foregroundColor(.secondary)
@@ -550,7 +588,7 @@ struct PromoCard: View {
         }
         .padding(16)
         .frame(width: 280, alignment: .leading)
-        .background(Color.white)
+        .background(Color(UIColor.secondarySystemGroupedBackground))
         .cornerRadius(12)
         .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
@@ -568,7 +606,7 @@ struct PromocionesSection: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text("Promociones")
-                    .font(.system(size: 18, weight: .semibold))
+                    .font(.rounded(18, weight: .semibold))
                 Spacer()
                 Image(systemName: "chevron.right")
                     .foregroundColor(.secondary)
@@ -602,14 +640,14 @@ struct PromocionCard: View {
                 )
 
             Text("Descuento")
-                .font(.system(size: 10, weight: .semibold))
+                .font(.rounded(10, weight: .semibold))
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
                 .background(Color(UIColor.systemGray5))
                 .cornerRadius(8)
 
             Text("Hasta 35%")
-                .font(.system(size: 14, weight: .bold))
+                .font(.rounded(14, weight: .bold))
 
             Text("Todos los días")
                 .font(.system(size: 11))
@@ -617,7 +655,7 @@ struct PromocionCard: View {
         }
         .padding(12)
         .frame(width: 130)
-        .background(Color.white)
+        .background(Color(UIColor.secondarySystemGroupedBackground))
         .cornerRadius(12)
         .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
@@ -634,7 +672,7 @@ struct MovimientosSection: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text("Movimientos")
-                    .font(.system(size: 18, weight: .semibold))
+                    .font(.rounded(18, weight: .semibold))
                 Spacer()
                 Image(systemName: "chevron.right")
                     .foregroundColor(.secondary)
@@ -653,7 +691,7 @@ struct MovimientosSection: View {
                     }
                 }
             }
-            .background(Color.white)
+            .background(Color(UIColor.secondarySystemGroupedBackground))
             .cornerRadius(12)
             .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
         }
@@ -679,7 +717,7 @@ struct MovimientoRow: View {
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
-                    .font(.system(size: 14, weight: .medium))
+                    .font(.rounded(14, weight: .medium))
                 Text(subtitle)
                     .font(.system(size: 12))
                     .foregroundColor(.secondary)
@@ -689,7 +727,7 @@ struct MovimientoRow: View {
 
             VStack(alignment: .trailing, spacing: 2) {
                 Text(amount)
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.rounded(14, weight: .semibold))
                     .foregroundColor(.green)
                 Text(date)
                     .font(.system(size: 12))
@@ -716,15 +754,15 @@ struct HomeTabBar: View {
                 onTransferTap()
             }
 
-            // Center button - QR Scanner
+            // Center button - Scanner
             Button(action: { onSmartScanTap() }) {
                 ZStack {
                     Circle()
                         .fill(Color.white)
                         .frame(width: 52, height: 52)
                         .shadow(color: .black.opacity(0.08), radius: 4, x: 0, y: 2)
-                    Image(systemName: "qrcode.viewfinder")
-                        .font(.system(size: 26))
+                    Image(systemName: "viewfinder")
+                        .font(.system(size: 26, weight: .medium))
                         .foregroundColor(Color(UIColor.darkGray))
                 }
             }
@@ -768,7 +806,7 @@ struct TabBarItem: View {
                 Image(systemName: icon)
                     .font(.system(size: 22))
                 Text(label)
-                    .font(.system(size: 10, weight: .medium))
+                    .font(.rounded(10, weight: .medium))
             }
             .foregroundColor(Color(UIColor.darkGray))
             .frame(maxWidth: .infinity)
